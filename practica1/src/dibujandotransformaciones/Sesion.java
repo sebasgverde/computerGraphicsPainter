@@ -26,7 +26,7 @@ import paqueteMatematico.*;
  *
  * @author sebastian
  */
-public class DibujandoTransformaciones extends JPanel {
+public class Sesion extends JPanel {
     
     int w;
     int h;
