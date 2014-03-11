@@ -92,6 +92,11 @@ public class Sesion extends JPanel {
                 int punto2 = conexiones.get(i++);
                 g2d.drawLine((int)puntos.get(punto1).mapearX(w), (int)puntos.get(punto1).mapearY(h), (int)puntos.get(punto2).mapearX(w), (int)puntos.get(punto2).mapearY(h));
             }*/
+           if(formas.get(j).seleccionado)
+                g2d.setColor(Color.GREEN);
+           else
+                g2d.setColor(Color.BLUE);
+           
             formas.get(j).crearPoligono();
             g2d.drawPolygon(formas.get(j).poligono);
             
@@ -106,6 +111,16 @@ public class Sesion extends JPanel {
       f.setPuntos(nuevForm);
       f.puntos = nuevForm;
       formas.add(f);
+      repaint();
+  }
+  
+  public void seleccionarFigura(int seleccion)
+  {
+      for(int i = 0; i < formas.size(); i++)
+      {
+          formas.get(i).seleccionado = false;
+      }
+      formas.get(seleccion).seleccionado = true;
       repaint();
   }
   

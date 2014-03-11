@@ -78,6 +78,12 @@ public class PintarGUI extends javax.swing.JFrame {
             }
         });
 
+        list1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                list1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -340,6 +346,11 @@ public class PintarGUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_sesion1MouseClicked
+
+    private void list1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_list1ActionPerformed
+        // TODO add your handling code here:
+        sesion1.seleccionarFigura(list1.getSelectedIndex());
+    }//GEN-LAST:event_list1ActionPerformed
 
     /**
      * @param args the command line arguments

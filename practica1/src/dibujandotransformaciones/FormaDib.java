@@ -22,11 +22,13 @@ public class FormaDib {
     public int [] tempX;
     public int [] tempY ;
     String nombre;
+    boolean seleccionado;
   
   public FormaDib()
   {
       puntos = new ArrayList<Vector2D>();
       siendoDibujada = true;
+      seleccionado = false;
   }
   
   public void setPuntos(ArrayList<Vector2D> form)
