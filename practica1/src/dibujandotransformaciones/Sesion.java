@@ -35,13 +35,13 @@ public class Sesion extends JPanel {
     boolean banderaGlobal = true;
     boolean bandRepintarTodo =false;
     
-  public ArrayList<Formap> formas;
+  public ArrayList<FormaDib> formas;
   
   Matriz2 mat;
   
   public void funcion()
   {
-      formas = new ArrayList<Formap>();
+      formas = new ArrayList<FormaDib>();
       
       mat = new Matriz2(0,0,0,0);
      
@@ -64,14 +64,14 @@ public class Sesion extends JPanel {
       w =  (size.width - insets.left - insets.right);//496
       h =  size.height - insets.top - insets.bottom;//474
       
-      int [] a = {0,100,200};
+     /* int [] a = {0,100,200};
       int [] b = {200,200,300};
         Polygon pol = new Polygon(a, b, 3);
         g2d.drawPolygon(pol);
       g2d.drawPolygon(a,b , 3);
       g2d.fillPolygon(pol);
       g2d.drawLine(w/2, 0, w/2, h);
-      g2d.drawLine(w,h/2,0, h/2);
+      g2d.drawLine(w,h/2,0, h/2);*/
       
       if(banderaGlobal)
         funcion();
@@ -96,7 +96,7 @@ public class Sesion extends JPanel {
   public void agregarForma(ArrayList<Vector2D> nuevForm)
   {
       banderaGlobal = false;
-      Formap f = new Formap();
+      FormaDib f = new FormaDib();
       f.setPuntos(nuevForm);
       f.puntos = nuevForm;
       formas.add(f);
@@ -118,7 +118,7 @@ public class Sesion extends JPanel {
       banderaGlobal = false;
      Matriz2 s = mat.scale(x, y);
      
-         Formap nuevF =new Formap();
+         FormaDib nuevF =new FormaDib();
       
       for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
       {
@@ -136,7 +136,7 @@ public class Sesion extends JPanel {
       banderaGlobal = false;
    Matriz2 t = mat.translate(x, y);
    
-    Formap nuevF =new Formap();
+    FormaDib nuevF =new FormaDib();
       
       for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
       {
@@ -154,7 +154,7 @@ public class Sesion extends JPanel {
       banderaGlobal=false;
       Matriz2 r = mat.rotation(theta);
       
-      Formap nuevF =new Formap();
+      FormaDib nuevF =new FormaDib();
       
       for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
       {

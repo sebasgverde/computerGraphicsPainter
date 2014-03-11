@@ -14,12 +14,12 @@ import paqueteMatematico.Vector2D;
  *
  * @author sebastian
  */
-public class Formap {
+public class FormaDib {
   
     public ArrayList<Vector2D> puntos;
     public Polygon poligono;
   
-  public Formap()
+  public FormaDib()
   {
       puntos = new ArrayList<Vector2D>();
   }
