@@ -35,73 +35,16 @@ public class Sesion extends JPanel {
     boolean banderaGlobal = true;
     boolean bandRepintarTodo =false;
     
-  public ArrayList<Forma> formas;
+  public ArrayList<Formap> formas;
   
   Matriz2 mat;
   
   public void funcion()
   {
-      formas = new ArrayList<Forma>();
+      formas = new ArrayList<Formap>();
       
       mat = new Matriz2(0,0,0,0);
-      
-       try{
-        // Open the file that is the first 
-        // command line parameter
-        FileInputStream fstream = new FileInputStream("especificacion.txt");
-        // Get the object of DataInputStream
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-
-              /*Matriz3 mat = new Matriz3(1,2,3,4,5,6,7,8,9);
-            Matriz3 matr = new Matriz3(1,0,2,0,1,0,0,0,1);
-
-            Matriz3 matri = mat.mulMatMat3(matr);*/
-
-        int numeroPuntos;
-        String strLine;
-        //Read File Line By Line
-        numeroPuntos = Integer.parseInt(br.readLine());
-
-        Forma form = new Forma();
-        
-        for(int i = 0; i< numeroPuntos; i++)
-        {
-            double x = Double.parseDouble(br.readLine());
-            double y = Double.parseDouble(br.readLine());
-
-            //x = mapearX((int)x, w);
-            //y = mapearY((int)y, h);
-
-            Vector2D temp = new Vector2D(x, y,1);
-
-            form.puntos.add(temp);
-        }
-
-        int numLineas;
-
-          numLineas = Integer.parseInt(br.readLine());
-
-           for(int i = 0; i< numLineas; i++)
-           {
-               Integer punto1 = Integer.parseInt(br.readLine());
-               form.conexiones.add(punto1);
-               Integer punto2 = Integer.parseInt(br.readLine());
-               form.conexiones.add(punto2);
-
-
-              // g2d.drawLine((int)puntos.get(punto1).x, (int)puntos.get(punto1).y, (int)puntos.get(punto2).x, (int)puntos.get(punto2).y);
-           }
-
-           formas.add(form);
-
-           // Print the content on the console
-
-          //Close the input stream
-           in.close();
-    }catch (Exception e){//Catch exception if any
-    System.err.println("Error: " + e.getMessage());
-  }
+     
   }
   
     @Override
@@ -122,7 +65,7 @@ public class Sesion extends JPanel {
       h =  size.height - insets.top - insets.bottom;//474
       
       int [] a = {0,100,200};
-      int [] b = {500,400,500};
+      int [] b = {200,200,300};
         Polygon pol = new Polygon(a, b, 3);
         g2d.drawPolygon(pol);
       g2d.drawPolygon(a,b , 3);
@@ -133,29 +76,31 @@ public class Sesion extends JPanel {
       if(banderaGlobal)
         funcion();
       
-      int inicial;
-      if(bandRepintarTodo)
-        inicial = 0;
-      else
-          inicial = formas.size()-1;
-       
-      for(int j = inicial; j< formas.size();j++)
-       {
-            ArrayList<Vector2D> puntos = formas.get(j).puntos;
-            ArrayList<Integer> conexiones= formas.get(j).conexiones;
 
-            for(int i = 0; i< conexiones.size();i=i)
+       
+     for(int j = 0; j< formas.size();j++)
+       {
+           // ArrayList<Vector2D> puntos = formas.get(j).puntos;
+
+           /* for(int i = 0; i< conexiones.size();i=i)
             {
                 int punto1 = conexiones.get(i++);
                 int punto2 = conexiones.get(i++);
                 g2d.drawLine((int)puntos.get(punto1).mapearX(w), (int)puntos.get(punto1).mapearY(h), (int)puntos.get(punto2).mapearX(w), (int)puntos.get(punto2).mapearY(h));
-            }
-       }
-     
-          
-
-        
-          
+            }*/
+            formas.get(j).crearPoligono();
+            g2d.drawPolygon(formas.get(j).poligono);
+       }   
+  }
+  
+  public void agregarForma(ArrayList<Vector2D> nuevForm)
+  {
+      banderaGlobal = false;
+      Formap f = new Formap();
+      f.setPuntos(nuevForm);
+      f.puntos = nuevForm;
+      formas.add(f);
+      repaint();
   }
   
   public int mapearX(int x, int w)
@@ -173,8 +118,7 @@ public class Sesion extends JPanel {
       banderaGlobal = false;
      Matriz2 s = mat.scale(x, y);
      
-         Forma nuevF =new Forma();
-    nuevF.conexiones = formas.get(formas.size()-1).conexiones;
+         Formap nuevF =new Formap();
       
       for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
       {
@@ -192,8 +136,7 @@ public class Sesion extends JPanel {
       banderaGlobal = false;
    Matriz2 t = mat.translate(x, y);
    
-    Forma nuevF =new Forma();
-    nuevF.conexiones = formas.get(formas.size()-1).conexiones;
+    Formap nuevF =new Formap();
       
       for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
       {
@@ -211,8 +154,7 @@ public class Sesion extends JPanel {
       banderaGlobal=false;
       Matriz2 r = mat.rotation(theta);
       
-      Forma nuevF =new Forma();
-      nuevF.conexiones = formas.get(formas.size()-1).conexiones;
+      Formap nuevF =new Formap();
       
       for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
       {
