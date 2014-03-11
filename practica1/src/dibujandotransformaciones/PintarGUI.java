@@ -8,6 +8,7 @@ package dibujandotransformaciones;
 
 import java.awt.MouseInfo;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.colorchooser.ColorChooserComponentFactory;
 
 import paqueteMatematico.*;
@@ -38,11 +39,10 @@ public class PintarGUI extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
+        list1 = new java.awt.List();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -67,13 +67,6 @@ public class PintarGUI extends javax.swing.JFrame {
 
         jCheckBox1.setText("Seleccion Manual");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
         jButton4.setText("C");
 
         jButton5.setText("G");
@@ -89,16 +82,16 @@ public class PintarGUI extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(list1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5))
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jToggleButton1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -110,9 +103,9 @@ public class PintarGUI extends javax.swing.JFrame {
                 .addComponent(jToggleButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                 .addComponent(jCheckBox1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(list1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
@@ -329,7 +322,11 @@ public class PintarGUI extends javax.swing.JFrame {
         if(jToggleButton1.isSelected())
             puntos = new ArrayList<Vector2D>();
         else
-            sesion1.agregarForma(puntos);
+        {
+            String nomb = JOptionPane.showInputDialog("Ingrese el nombre de la figura");
+            sesion1.agregarForma(puntos, nomb);
+            list1.add(nomb);
+        }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void sesion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sesion1MouseClicked
@@ -337,6 +334,8 @@ public class PintarGUI extends javax.swing.JFrame {
         if(jToggleButton1.isSelected())
         {
             puntos.add(new Vector2D((double)MouseInfo.getPointerInfo().getLocation().x,(double)MouseInfo.getPointerInfo().getLocation().y,1));
+            sesion1.formaDibujadaAhora.puntos = puntos;
+            sesion1.repaint();
             System.out.println(MouseInfo.getPointerInfo().getLocation().toString());
         }
 
@@ -387,20 +386,19 @@ public class PintarGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider5;
     private javax.swing.JSlider jSlider6;
     private javax.swing.JSlider jSlider7;
     private javax.swing.JSlider jSlider8;
     private javax.swing.JSlider jSlider9;
     private javax.swing.JToggleButton jToggleButton1;
+    private java.awt.List list1;
     private dibujandotransformaciones.Sesion sesion1;
     // End of variables declaration//GEN-END:variables
 }

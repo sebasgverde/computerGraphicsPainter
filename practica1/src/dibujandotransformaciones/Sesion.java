@@ -36,12 +36,14 @@ public class Sesion extends JPanel {
     boolean bandRepintarTodo =false;
     
   public ArrayList<FormaDib> formas;
+  public FormaDib formaDibujadaAhora;
   
   Matriz2 mat;
   
   public void funcion()
   {
       formas = new ArrayList<FormaDib>();
+      formaDibujadaAhora = new FormaDib();
       
       mat = new Matriz2(0,0,0,0);
      
@@ -76,13 +78,15 @@ public class Sesion extends JPanel {
       if(banderaGlobal)
         funcion();
       
-
+      
+      formaDibujadaAhora.crearPoligono();
+      g2d.drawPolyline(formaDibujadaAhora.tempX, formaDibujadaAhora.tempY,formaDibujadaAhora.puntos.size());
        
      for(int j = 0; j< formas.size();j++)
        {
            // ArrayList<Vector2D> puntos = formas.get(j).puntos;
 
-           /* for(int i = 0; i< conexiones.size();i=i)
+            /*for(int i = 0; i< conexiones.size();i=i)
             {
                 int punto1 = conexiones.get(i++);
                 int punto2 = conexiones.get(i++);
@@ -90,13 +94,15 @@ public class Sesion extends JPanel {
             }*/
             formas.get(j).crearPoligono();
             g2d.drawPolygon(formas.get(j).poligono);
+            
        }   
   }
   
-  public void agregarForma(ArrayList<Vector2D> nuevForm)
+  public void agregarForma(ArrayList<Vector2D> nuevForm, String nomFig)
   {
       banderaGlobal = false;
       FormaDib f = new FormaDib();
+      f.nombre = nomFig;
       f.setPuntos(nuevForm);
       f.puntos = nuevForm;
       formas.add(f);

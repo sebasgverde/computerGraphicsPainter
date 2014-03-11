@@ -18,10 +18,15 @@ public class FormaDib {
   
     public ArrayList<Vector2D> puntos;
     public Polygon poligono;
+    public Boolean siendoDibujada;
+    public int [] tempX;
+    public int [] tempY ;
+    String nombre;
   
   public FormaDib()
   {
       puntos = new ArrayList<Vector2D>();
+      siendoDibujada = true;
   }
   
   public void setPuntos(ArrayList<Vector2D> form)
@@ -31,8 +36,8 @@ public class FormaDib {
   
   public void crearPoligono()
   {
-      int [] tempX = new int[puntos.size()];
-      int [] tempY = new int[puntos.size()];
+      tempX = new int[puntos.size()];
+      tempY = new int[puntos.size()];
       
       for(int i = 0; i < puntos.size(); i++)
       {
