@@ -23,6 +23,7 @@ public class FormaDib {
     public int [] tempY ;
     String nombre;
     boolean seleccionado;
+    String color;
   
   public FormaDib()
   {

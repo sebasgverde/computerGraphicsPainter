@@ -37,6 +37,7 @@ public class Sesion extends JPanel {
     
   public ArrayList<FormaDib> formas;
   public FormaDib formaDibujadaAhora;
+  public GestionSaveLoad saveLoad;
   
   Matriz2 mat;
   
@@ -44,6 +45,7 @@ public class Sesion extends JPanel {
   {
       formas = new ArrayList<FormaDib>();
       formaDibujadaAhora = new FormaDib();
+      saveLoad = new GestionSaveLoad();
       
       mat = new Matriz2(0,0,0,0);
      
@@ -170,48 +172,39 @@ public class Sesion extends JPanel {
    repaint();
   }
   
-  public void rotar(double theta)
+  public void rotar(double theta, int indFig)
   {
       banderaGlobal=false;
       Matriz2 r = mat.rotation(theta);
       
-      FormaDib nuevF =new FormaDib();
+      //FormaDib nuevF =new FormaDib();
       
       for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
       {
           //puntos.add(r.multVector(puntos.get(i)));
-        nuevF.puntos.add(r.multVector(formas.get(formas.size()-1).puntos.get(i))); 
-               System.out.println(nuevF.puntos.get(i).x);
+          formas.get(indFig).puntos.set(i, r.multVector(formas.get(indFig).puntos.get(i)));
+        //nuevF.puntos.add(r.multVector(formas.get(formas.size()-1).puntos.get(i))); 
+               System.out.println(formas.get(indFig).puntos.get(i).x);
 
       }
-      formas.add(nuevF);
+      //formas.add(nuevF);
       repaint();
   }
   
   public void draw()
   {
       repaint();
+  }   
+  
+  public void guardarDibujo(String ruta)
+  {
+      saveLoad.guardarDibujo(ruta, formas);
   }
- 
-    
-    /**
-     * Programa principal
-     * @param args 
-     */
-    /*public static void main(String[] args) {
-              // Crear un nuevo Frame
-      JFrame frame = new JFrame("Lines");
-      // Al cerrar el frame, termina la ejecuciÃƒÆ’Ã‚Â³n de este programa
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      // Agregar un JPanel que se llama Points (esta clase)
-      frame.add(new DibujandoTransformaciones());
-      // Asignarle tamaÃƒÆ’Ã‚Â±o
-      frame.setSize(512+16, 512+38);
-      // Poner el frame en el centro de la pantalla
-      frame.setLocationRelativeTo(null);
-      // Mostrar el frame
-      frame.setVisible(true);
-    }*/
-    
-
+  
+  public void cargarDibujo(String ruta)
+  {
+      banderaGlobal = false;
+      formas = saveLoad.cargarDibujo(ruta);
+      repaint();
+  }
 }
