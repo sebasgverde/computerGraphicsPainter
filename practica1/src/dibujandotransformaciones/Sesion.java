@@ -154,32 +154,33 @@ public class Sesion extends JPanel {
    repaint();
   }
   
-  public void trasladar(int x, int y)
+  public void trasladar(int indFig, int x, int y)
   {
       banderaGlobal = false;
    Matriz2 t = mat.translate(x, y);
    
-    FormaDib nuevF =new FormaDib();
+    //FormaDib nuevF =new FormaDib();
       
-      for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
+      for(int i = 0; i < formas.get(indFig).puntos.size();i++)
       {
           //puntos.add(r.multVector(puntos.get(i)));
-        nuevF.puntos.add(t.multVector(formas.get(formas.size()-1).puntos.get(i))); 
-               System.out.println(nuevF.puntos.get(i).x);
+          formas.get(indFig).puntos.set(i, t.multVector(formas.get(indFig).puntos.get(i)));
+        //nuevF.puntos.add(t.multVector(formas.get(i).puntos.get(i))); 
+          System.out.println(formas.get(indFig).puntos.get(i).x);
 
       }
-      formas.add(nuevF);
+      //formas.add(nuevF);
    repaint();
   }
   
-  public void rotar(double theta, int indFig)
+  public void rotar(int indFig,double theta)
   {
       banderaGlobal=false;
       Matriz2 r = mat.rotation(theta);
       
       //FormaDib nuevF =new FormaDib();
       
-      for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
+      for(int i = 0; i < formas.get(indFig).puntos.size();i++)
       {
           //puntos.add(r.multVector(puntos.get(i)));
           formas.get(indFig).puntos.set(i, r.multVector(formas.get(indFig).puntos.get(i)));
