@@ -73,8 +73,18 @@ public class PintarGUI extends javax.swing.JFrame {
         jCheckBox1.setText("Seleccion Manual");
 
         jButton4.setText("C");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("G");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jToggleButton1.setText("Nueva Forma");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -467,6 +477,22 @@ public class PintarGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         sesion1.pintarFig(list1.getSelectedIndex(), jColorChooser1.getColor().getRGB());
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        String rutaGuard = JOptionPane.showInputDialog("Ingrese el nombre del archivo");
+        sesion1.guardarFigura(rutaGuard, list1.getSelectedIndex());
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        try {
+            String rutaGuard = JOptionPane.showInputDialog("Ingrese el nombre del archivo");
+            sesion1.cargarFigura(rutaGuard);
+            list1.add(sesion1.formas.get(sesion1.formas.size()-1).nombre);   
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

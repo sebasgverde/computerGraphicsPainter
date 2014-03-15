@@ -217,10 +217,25 @@ public class Sesion extends JPanel {
       saveLoad.guardarDibujo(ruta, formas);
   }
   
+  public void guardarFigura(String ruta, int indFig)
+  {
+      ArrayList<FormaDib> newArray = new ArrayList<FormaDib>();
+      newArray.add(formas.get(indFig));
+      saveLoad.guardarDibujo(ruta, newArray);   
+  }
+  
   public void cargarDibujo(String ruta)
   {
       banderaGlobal = false;
       formas = saveLoad.cargarDibujo(ruta);
       repaint();
+  }
+  
+  public void cargarFigura(String ruta)
+  {
+      banderaGlobal = false;
+      ArrayList<FormaDib> newArray = saveLoad.cargarDibujo(ruta);
+      formas.add(newArray.get(0));
+      repaint();      
   }
 }
