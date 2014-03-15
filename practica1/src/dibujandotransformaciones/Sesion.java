@@ -94,12 +94,18 @@ public class Sesion extends JPanel {
                 int punto2 = conexiones.get(i++);
                 g2d.drawLine((int)puntos.get(punto1).mapearX(w), (int)puntos.get(punto1).mapearY(h), (int)puntos.get(punto2).mapearX(w), (int)puntos.get(punto2).mapearY(h));
             }*/
+           
+            formas.get(j).crearPoligono();
+            if(!formas.get(j).color.equals("null"))
+            {          
+                g2d.setColor(new Color(Integer.parseInt(formas.get(j).color)));
+                g2d.fillPolygon(formas.get(j).poligono);
+            }
+            
            if(formas.get(j).seleccionado)
                 g2d.setColor(Color.GREEN);
            else
-                g2d.setColor(Color.BLUE);
-           
-            formas.get(j).crearPoligono();
+                g2d.setColor(Color.BLUE);            
             g2d.drawPolygon(formas.get(j).poligono);
             
        }   
@@ -189,6 +195,15 @@ public class Sesion extends JPanel {
 
       }
       //formas.add(nuevF);
+      repaint();
+  }
+  
+  public void pintarFig(int indFig, int colorRGB)
+  {
+      if(colorRGB == -1)
+          formas.get(indFig).color = "null";
+      else
+        formas.get(indFig).color = Integer.toString(colorRGB);
       repaint();
   }
   

@@ -30,6 +30,7 @@ public class FormaDib {
       puntos = new ArrayList<Vector2D>();
       siendoDibujada = true;
       seleccionado = false;
+      color = "null";
   }
   
   public void setPuntos(ArrayList<Vector2D> form)
