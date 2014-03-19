@@ -65,8 +65,8 @@ public class Sesion extends JPanel {
       // Insets son los bordes y los tÃƒÆ’Ã‚Â­tulos de la ventana.
       Insets insets = getInsets();
 
-      w =  (size.width - insets.left - insets.right);//496
-      h =  size.height - insets.top - insets.bottom;//474
+     // w =  (size.width - insets.left - insets.right);//496
+      //h =  size.height - insets.top - insets.bottom;//474
       
      /* int [] a = {0,100,200};
       int [] b = {200,200,300};

@@ -477,7 +477,9 @@ public class PintarGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jToggleButton1.isSelected())
         {
-            puntos.add(new Vector2D((double)MouseInfo.getPointerInfo().getLocation().x,(double)MouseInfo.getPointerInfo().getLocation().y,1));
+            int desplHori = this.getLocation().x + this.getInsets().left;
+            int desplvert = this.getLocation().y + this.getInsets().top;
+            puntos.add(new Vector2D((double)MouseInfo.getPointerInfo().getLocation().x-desplHori,(double)MouseInfo.getPointerInfo().getLocation().y-desplvert,1));
             sesion1.formaDibujadaAhora.puntos = puntos;
             sesion1.repaint();
             System.out.println(MouseInfo.getPointerInfo().getLocation().toString());
