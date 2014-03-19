@@ -461,15 +461,23 @@ public class PintarGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        sesion1.cargarDibujo("nuevoDibujo.txt");
+
+        
+        try {
+        String rutaGuard = JOptionPane.showInputDialog("Ingrese el nombre del archivo");
+        sesion1.cargarDibujo(rutaGuard); 
+            
         list1.removeAll();
         for(int i = 0; i < sesion1.formas.size(); i++)
             list1.add(sesion1.formas.get(i).nombre);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        sesion1.guardarDibujo("nuevoDibujo.txt");
+        String rutaGuard = JOptionPane.showInputDialog("Ingrese el nombre del archivo");
+        sesion1.guardarDibujo(rutaGuard);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
