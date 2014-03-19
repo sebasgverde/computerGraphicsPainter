@@ -142,21 +142,22 @@ public class Sesion extends JPanel {
       return (h/2-y);
   }
   
-   public void escalar(double x, double y)
+   public void escalar(int indFig, double x, double y)
   {
       banderaGlobal = false;
      Matriz2 s = mat.scale(x, y);
      
-         FormaDib nuevF =new FormaDib();
+        // FormaDib nuevF =new FormaDib();
       
-      for(int i = 0; i < formas.get(formas.size()-1).puntos.size();i++)
+      for(int i = 0; i < formas.get(indFig).puntos.size();i++)
       {
           //puntos.add(r.multVector(puntos.get(i)));
-        nuevF.puntos.add(s.multVector(formas.get(formas.size()-1).puntos.get(i))); 
-               System.out.println(nuevF.puntos.get(i).x);
+          formas.get(indFig).puntos.set(i, s.multVector(formas.get(indFig).puntos.get(i)));
+        //nuevF.puntos.add(s.multVector(formas.get(formas.size()-1).puntos.get(i))); 
+               System.out.println(formas.get(indFig).puntos.get(i).x);
 
       }
-      formas.add(nuevF);
+     // formas.add(nuevF);
    repaint();
   }
   
