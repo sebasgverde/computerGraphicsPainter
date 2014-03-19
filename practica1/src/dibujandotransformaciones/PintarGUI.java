@@ -23,6 +23,8 @@ public class PintarGUI extends javax.swing.JFrame {
     int deltaTraslado;
     double deltaEscalamiento;
     double angulo;
+    int pivotX;
+    int pivotY;
     /**
      * Creates new form PintarGUI
      */
@@ -32,6 +34,8 @@ public class PintarGUI extends javax.swing.JFrame {
         deltaTraslado = 10;
         deltaEscalamiento = 1.5;
         angulo = 0.3;
+        pivotX = 0;
+        pivotY = 0;
     }
 
     /**
@@ -73,6 +77,7 @@ public class PintarGUI extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         sesion1 = new dibujandotransformaciones.Sesion();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -356,6 +361,8 @@ public class PintarGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Punto Pivote: ");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -379,6 +386,8 @@ public class PintarGUI extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jButton11)
+                        .addGap(107, 107, 107)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel7Layout.setVerticalGroup(
@@ -400,7 +409,9 @@ public class PintarGUI extends javax.swing.JFrame {
                             .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton11)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton11)
+                            .addComponent(jLabel1))
                         .addGap(40, 40, 40))))
         );
 
@@ -475,33 +486,42 @@ public class PintarGUI extends javax.swing.JFrame {
 
     private void sesion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sesion1MouseClicked
         // TODO add your handling code here:
+        int desplHori = this.getLocation().x + this.getInsets().left;
+        int desplvert = this.getLocation().y + this.getInsets().top;    
+        int x = MouseInfo.getPointerInfo().getLocation().x-desplHori;
+        int y = MouseInfo.getPointerInfo().getLocation().y-desplvert;
+        
         if(jToggleButton1.isSelected())
         {
-            int desplHori = this.getLocation().x + this.getInsets().left;
-            int desplvert = this.getLocation().y + this.getInsets().top;
-            puntos.add(new Vector2D((double)MouseInfo.getPointerInfo().getLocation().x-desplHori,(double)MouseInfo.getPointerInfo().getLocation().y-desplvert,1));
+            puntos.add(new Vector2D((double)x,(double)y,1));
             sesion1.formaDibujadaAhora.puntos = puntos;
             sesion1.repaint();
             System.out.println(MouseInfo.getPointerInfo().getLocation().toString());
+        }
+        else
+        {
+            pivotX = x;
+            pivotY = y;
+            jLabel1.setText("Punto Pivote: " + x + "," + y);
         }
 
     }//GEN-LAST:event_sesion1MouseClicked
 
     private void list1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_list1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
         sesion1.seleccionarFigura(list1.getSelectedIndex());
     }//GEN-LAST:event_list1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         setAngulo(jTextField3.getText());
-        sesion1.rotar(list1.getSelectedIndex(), angulo);        
+        sesion1.rotar(list1.getSelectedIndex(), angulo, pivotX, pivotY);        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         setAngulo(jTextField3.getText());        
-        sesion1.rotar(list1.getSelectedIndex(), -angulo);        
+        sesion1.rotar(list1.getSelectedIndex(), -angulo, pivotX, pivotY);        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     public void setDeltaTraslado(String del)
@@ -576,13 +596,13 @@ public class PintarGUI extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         setDeltaEscalam(jTextField2.getText());
-        sesion1.escalar(list1.getSelectedIndex(), deltaEscalamiento, deltaEscalamiento); 
+        sesion1.escalar(list1.getSelectedIndex(), deltaEscalamiento, deltaEscalamiento, pivotX, pivotY); 
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
         setDeltaEscalam(jTextField2.getText());        
-        sesion1.escalar(list1.getSelectedIndex(), 2-deltaEscalamiento, 2-deltaEscalamiento); 
+        sesion1.escalar(list1.getSelectedIndex(), 2-deltaEscalamiento, 2-deltaEscalamiento, pivotX, pivotY); 
     }//GEN-LAST:event_jButton13ActionPerformed
 
     /**
@@ -636,6 +656,7 @@ public class PintarGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JColorChooser jColorChooser1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

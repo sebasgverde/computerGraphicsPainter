@@ -142,10 +142,13 @@ public class Sesion extends JPanel {
       return (h/2-y);
   }
   
-   public void escalar(int indFig, double x, double y)
+   public void escalar(int indFig, double x, double y, int pivoteX, int pivoteY)
   {
       banderaGlobal = false;
+     Matriz2 t = mat.translate(-pivoteX, -pivoteY);
+     Matriz2 tInv = mat.translate(pivoteX, pivoteY);
      Matriz2 s = mat.scale(x, y);
+     s = s.mulMatMat2(t);
      
         // FormaDib nuevF =new FormaDib();
       
@@ -153,6 +156,7 @@ public class Sesion extends JPanel {
       {
           //puntos.add(r.multVector(puntos.get(i)));
           formas.get(indFig).puntos.set(i, s.multVector(formas.get(indFig).puntos.get(i)));
+          formas.get(indFig).puntos.set(i, tInv.multVector(formas.get(indFig).puntos.get(i)));
         //nuevF.puntos.add(s.multVector(formas.get(formas.size()-1).puntos.get(i))); 
                System.out.println(formas.get(indFig).puntos.get(i).x);
 
@@ -180,10 +184,13 @@ public class Sesion extends JPanel {
    repaint();
   }
   
-  public void rotar(int indFig,double theta)
+  public void rotar(int indFig,double theta, int pivoteX, int pivoteY)
   {
       banderaGlobal=false;
+      Matriz2 t = mat.translate(-pivoteX, -pivoteY);
+      Matriz2 tInv = mat.translate(pivoteX, pivoteY);
       Matriz2 r = mat.rotation(theta);
+      r = r.mulMatMat2(t);
       
       //FormaDib nuevF =new FormaDib();
       
@@ -191,6 +198,7 @@ public class Sesion extends JPanel {
       {
           //puntos.add(r.multVector(puntos.get(i)));
           formas.get(indFig).puntos.set(i, r.multVector(formas.get(indFig).puntos.get(i)));
+          formas.get(indFig).puntos.set(i, tInv.multVector(formas.get(indFig).puntos.get(i)));
         //nuevF.puntos.add(r.multVector(formas.get(formas.size()-1).puntos.get(i))); 
                System.out.println(formas.get(indFig).puntos.get(i).x);
 
